@@ -1,35 +1,20 @@
-import React from "react";
-import { createRoot } from "react-dom";
-
-const Pet = (props) => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, props.name),
-    React.createElement("h2", {}, props.animal),
-    React.createElement("h2", {}, props.breed),
-  ]);
-};
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SearchParams from "./SearchParams";
+import Details from "./Details"
 
 const App = () => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, "Adopt Me!"),
-    React.createElement(Pet, {
-      name: "Laika",
-      animal: "Cat",
-      breed: "EHK",
-    }),
-    React.createElement(Pet, {
-      name: "Cherny",
-      animal: "Cat",
-      breed: "EHK",
-    }),
-    React.createElement(Pet, {
-      name: "Franka",
-      animal: "Cat",
-      breed: "EHK",
-    }),
-  ]);
+  return (
+    <BrowserRouter>
+      <h1>Adopt Me!</h1>
+      <Routes>
+        <Route path="/details/:id" element={<Details />} />
+        <Route path="/" element={<SearchParams />} />
+      </Routes>
+    </BrowserRouter>
+  )
 };
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(React.createElement(App));
+root.render(<App />);
